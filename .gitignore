@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# downloaded dataset
+data/raw
+
+# saved models
+best_model.h5

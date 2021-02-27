@@ -4,10 +4,13 @@ from tensorflow.keras.layers import LSTM, Dense, Embedding, Conv1D, MaxPool1D, G
 
 def lstm_model(n_notes):
     model = Sequential()
-    model.add(Embedding(n_notes, 64))
+    model.add(Embedding(n_notes, 100))
     model.add(LSTM(128,return_sequences=True))
     model.add(LSTM(128))
     model.add(Dense(256, activation='relu'))
+    model.add(Dropout(0.2))
+    model.add(Dense(256, activation='relu'))
+    model.add(Dropout(0.2))
     model.add(Dense(n_notes, activation='softmax'))
     model.compile(loss='sparse_categorical_crossentropy', optimizer='adam')
     return model
@@ -16,7 +19,7 @@ def cnn_model(n_notes):
     model = Sequential()
         
     #embedding layer
-    model.add(Embedding(len(n_notes), 100, input_length=32, trainable=True)) 
+    model.add(Embedding(len(n_notes), 100, input_length=32)) 
 
     model.add(Conv1D(64,3, padding='causal',activation='relu'))
     model.add(Dropout(0.2))

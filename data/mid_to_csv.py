@@ -7,7 +7,7 @@ def read_midi(file):
     
     print("Loading Music File:",file)
     
-    notes=[]
+    notes, durations = [], []
     notes_to_parse = None
     
     #parsing a midi file
@@ -30,15 +30,24 @@ def read_midi(file):
                 #note
                 if isinstance(element, note.Note):
                     notes.append(str(element.pitch))
+                    durations.append(str(element.quarterLength))
                 
                 #chord
                 elif isinstance(element, chord.Chord):
                     notes.append('.'.join(str(n) for n in element.normalOrder))
-    return ','.join(notes)
+                    durations.append(str(element.quarterLength))
 
-path = './schubert/'
+    return ','.join(notes), ','.join(durations)
+
+
+path = 'data/raw/'
 files = [file for file in os.listdir(path) if file.endswith(".mid")]
-notes_array = np.array([read_midi(path + file) for file in files])
 
+notes_array, durations_array = [], []
+for file in files:
+    notes, durations = read_midi(path + file)
+    notes_array.append(notes)
+    durations_array.append(durations)
 
-np.savetxt('mozart.csv', notes_array, delimiter=',', fmt='%s')
+np.savetxt('data/notes.csv', notes_array, delimiter=',', fmt='%s')
+np.savetxt('data/duration.csv', durations_array, delimiter=',', fmt='%s')
