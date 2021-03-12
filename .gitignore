@@ -133,3 +133,5 @@ data/raw
 
 # saved models
 best_model.h5
+
+node_modules/

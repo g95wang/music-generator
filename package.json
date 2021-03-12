@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "midi-player-js": "^2.0.13"
+  }
+}
