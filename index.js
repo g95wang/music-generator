@@ -2,7 +2,7 @@ const Timidity = require("timidity");
 
 const player = new Timidity();
 function playMusic() {
-  player.load("./music.mid");
+  player.load("music-generator/music.mid");
   // getAudioContext().resume();
   player.play();
 
