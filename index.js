@@ -1,12 +1,11 @@
-import { Player as _Player } from 'midi-player-js';
- 
-// Initialize player and register event handler
-var Player = new _Player(function(event) {
-    console.log(event);
-});
- 
-function playMusic(){
-    // Load a MIDI file
-    Player.loadFile('./music.mid');
-    Player.play();
-}
+const Timidity = require("timidity");
+const p5 = require("p5");
+
+p5.getAudioContext().resume();
+const player = new Timidity();
+player.load("./music.mid");
+player.play();
+
+// player.on("playing", () => {
+//   console.log(player.duration); // => 351.521
+// });
