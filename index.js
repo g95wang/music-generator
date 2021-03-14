@@ -1,7 +1,6 @@
 const Timidity = require("timidity");
-const p5 = require("p5");
 
-p5.getAudioContext().resume();
+getAudioContext().resume();
 const player = new Timidity();
 player.load("./music.mid");
 player.play();
